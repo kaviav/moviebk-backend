@@ -31,11 +31,13 @@ const movieSchema = new Schema({
   },
   bookings: [
     {
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: "Booking",
     },
   ],
   admin: {
-    type: String,
+    type: mongoose.Types.ObjectId,
+    ref: "Admin",
     required: true,
   },
 });

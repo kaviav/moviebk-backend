@@ -1,3 +1,4 @@
+import Booking from "../models/Booking";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
 
@@ -139,4 +140,34 @@ export const loginUser = async (req, res, next) => {
   return res
     .status(200)
     .json({ message: "Login successful", user: existingUser });
+};
+
+export const getBookingsOfUser = async (req, res, next) => {
+  const id = req.params.id;
+  let bookings;
+  try {
+    bookings = await Booking.find({ user: id })
+      .populate("movie")
+      .populate("user");
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!bookings) {
+    return res.status(500).json({ message: "Unable to get Bookings" });
+  }
+  return res.status(200).json({ bookings });
+};
+
+export const getUserById = async (req, res, next) => {
+  const id = req.params.id;
+  let user;
+  try {
+    user = await User.findById(id);
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!user) {
+    return res.status(500).json({ message: "Unexpected Error Occured" });
+  }
+  return res.status(200).json({ user });
 };

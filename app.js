@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/user-routes";
 import adminRouter from "./routes/admin-routes";
 import movieRouter from "./routes/movie-routes";
+import bookingRouter from "./routes/booking-routes";
 const app = express();
 dotenv.config();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/movie", movieRouter);
+app.use("/booking", bookingRouter);
 
 //
 mongoose

@@ -70,15 +70,16 @@ export const adminLogin = async (req, res, next) => {
     .json({ message: "Loggedin successfully", token, id: existingAdmin._id });
 };
 
-// export const getAllAdmins = async (req, res, next) => {
-//   let admins;
-//   try {
-//     admins = await Admin.find();
-//   } catch (err) {
-//     console.log(err);
-//   }
+export const getAllAdmins = async (req, res, next) => {
+  let admins;
+  try {
+    admins = await Admin.find();
+  } catch (err) {
+    console.log(err);
+  }
 
-//   if (!admins) {
-//     return res.status();
-//   }
-// };
+  if (!admins) {
+    return res.status(500).json({ message: "Internal server error!" });
+  }
+  return res.status(200).json({ admins });
+};
