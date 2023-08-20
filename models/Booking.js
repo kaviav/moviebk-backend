@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
-
-const bookingSchema = new Schema({
+const bookingSchema = new mongoose.Schema({
   movie: {
     type: mongoose.Types.ObjectId,
     ref: "Movie",

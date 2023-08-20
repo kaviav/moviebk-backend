@@ -49,7 +49,7 @@ export const signUp = async (req, res, next) => {
     return res.status(500).json({ message: "Unexpected error ocuured!" });
   }
 
-  return res.status(201).json({ user });
+  return res.status(201).json({ id: user._id });
 };
 
 export const updateUser = async (req, res, next) => {
@@ -102,7 +102,6 @@ export const deleteUser = async (req, res, next) => {
 };
 
 export const loginUser = async (req, res, next) => {
-  const id = req.params.id;
   const { email, password } = req.body;
   if (!email && email.trim() === "" && !password && password.trim() === "") {
     return res.status(422).json({ message: "Invalid inputs!" });
@@ -116,7 +115,9 @@ export const loginUser = async (req, res, next) => {
   }
 
   if (!existingUser) {
-    return res.status(404).json({ message: "Unable to the user by this ID" });
+    return res
+      .status(404)
+      .json({ message: "Unable to find the user by this ID" });
   }
 
   const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
@@ -125,21 +126,9 @@ export const loginUser = async (req, res, next) => {
     return res.status(400).json({ message: "Incorrect password!" });
   }
 
-  let user;
-
-  try {
-    user = await User.findById(id);
-  } catch (err) {
-    console.log(err);
-  }
-
-  if (!user) {
-    return res.status(404).json({ message: "Could not find the user" });
-  }
-
   return res
     .status(200)
-    .json({ message: "Login successful", user: existingUser });
+    .json({ message: "Login successful", id: existingUser._id });
 };
 
 export const getBookingsOfUser = async (req, res, next) => {

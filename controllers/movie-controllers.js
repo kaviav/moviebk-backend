@@ -27,6 +27,7 @@ export const addMovie = async (req, res, next) => {
       return;
     }
   });
+ 
   //
   /////create new movie
   const {

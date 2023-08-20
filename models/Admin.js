@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
-
-const adminSchema = new Schema({
+const adminSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
     unique: true,
+    required: true,
   },
   password: {
     type: String,

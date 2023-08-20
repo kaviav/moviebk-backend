@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
-
 const Schema = mongoose.Schema;
-
 const userSchema = new Schema({
   name: {
     type: String,
@@ -17,12 +15,7 @@ const userSchema = new Schema({
     required: true,
     minLength: 6,
   },
-  bookings: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Booking",
-    },
-  ],
+  bookings: [{ type: mongoose.Types.ObjectId, ref: "Booking" }],
 });
 
-export default mongoose.model("User", userSchema); //users in db
+export default mongoose.model("User", userSchema);
