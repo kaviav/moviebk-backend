@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Booking from "../models/Booking";
 import Movie from "../models/Movie";
 import User from "../models/User";
+
 export const newBooking = async (req, res, next) => {
   let newBooking;
   const { movie, seatNumber, date, user } = req.body;
